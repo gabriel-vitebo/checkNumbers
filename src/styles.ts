@@ -9,7 +9,9 @@ export const Container = styled.div`
 `
 
 export const Header = styled.header`
-  display: grid;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
   width: 100vw;
   grid-template-columns: 1fr 1fr;
   padding: 2rem 0 2.5rem 0;
@@ -47,24 +49,25 @@ export const DrawnNumbers = styled.div`
 
 export const Main = styled.main`
   display: flex;
+  width: 100vw;
   flex-direction: column;
   grid-template-columns: 1fr 1fr;
   padding: 2rem 0 2rem 0;
   justify-content: space-around;
   align-items: center;
-  grid-column-start: 1;
 
   > .buttonDelete {
+    width: 60%;
     display: flex;
-    width: 75%;
     justify-content: flex-end;
     margin-bottom: 2rem;
   }
 
   > .content {
     display: flex;
-    width: 100vw;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 6rem;
+    width: 100%;
   }
 `
 

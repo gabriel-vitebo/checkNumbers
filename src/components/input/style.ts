@@ -45,14 +45,13 @@ export const Container = styled.div`
 
   > button {
     display: flex;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 1rem;
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.COLORS.correct};
     border: none;
-    width: 6.5rem;
+    width: auto;
     height: 2.8rem;
     color: ${({ theme }) => theme.COLORS.light100};
     font-size: 1.6rem;

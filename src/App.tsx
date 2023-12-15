@@ -1,25 +1,38 @@
 import { Input } from './components/input'
-import { Container, ResultGame, UserGame } from './styles'
+import { Container, DrawnNumbers, Header, Main, UserNumberGame } from './styles'
 
 function App() {
   return (
     <Container>
-      <UserGame>
-        <h2>Digite os seus números</h2>
+      <Header>
+        <UserNumberGame>
+          <h2>Digite os seus números</h2>
+          <Input
+            id="userNumber"
+            hasButton
+            placeholder={'ex.: 01,20,65,78,07,33'}
+            option="Adicionar"
+          />
+        </UserNumberGame>
+        <DrawnNumbers>
+          <h2>Digite os números sorteados</h2>
+          <Input
+            id="resultNumber"
+            hasButton
+            placeholder={'ex.: 01,20,65,78,07,33'}
+            option="Conferir"
+          />
+        </DrawnNumbers>
+      </Header>
+      <Main>
         <Input
-          id="userNumber"
-          hasButton
-          placeholder={'ex.: 01,20,65,78,07,33'}
+          id="gameOne"
+          hasButton={false}
+          title="Jogo 1"
+          value={'01, 02, 03'}
+          readOnly
         />
-      </UserGame>
-      <ResultGame>
-        <h2>Digite os números sorteados</h2>
-        <Input
-          id="resultNumber"
-          hasButton
-          placeholder={'ex.: 01,20,65,78,07,33'}
-        />
-      </ResultGame>
+      </Main>
     </Container>
   )
 }

@@ -46,11 +46,26 @@ export const DrawnNumbers = styled.div`
 `
 
 export const Main = styled.main`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-columns: 1fr 1fr;
   padding: 2rem 0 2rem 0;
   justify-content: space-around;
   align-items: center;
+  grid-column-start: 1;
+
+  > .buttonDelete {
+    display: flex;
+    width: 75%;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  > .content {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+  }
 `
 
 export const UserGames = styled.main``

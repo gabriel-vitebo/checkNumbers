@@ -1,3 +1,4 @@
+import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
 import { InputReadOnly } from './components/inputReadOnly'
 import {
@@ -34,22 +35,29 @@ function App() {
         </DrawnNumbers>
       </Header>
       <Main>
-        <UserGames>
-          <InputReadOnly
-            id="gameOne"
-            title="Jogo 1"
-            value={'01-20-65-78-07-33'}
-            readOnly
-          />
-        </UserGames>
-        <Result>
-          <InputReadOnly
-            id="gameOne"
-            title="Resultado"
-            value={'01-20-65-78-07-33'}
-            readOnly
-          />
-        </Result>
+        <div className="buttonDelete">
+          <DeleteButton />
+        </div>
+        <div className="content">
+          <UserGames>
+            <InputReadOnly
+              id="gameOne"
+              title="Jogo 1"
+              value={'01-20-65-78-07-33'}
+              readOnly
+              hasButton
+            />
+          </UserGames>
+          <Result>
+            <InputReadOnly
+              hasButton={false}
+              id="gameOne"
+              title="Resultado"
+              value={'01-20-65-78-07-33'}
+              readOnly
+            />
+          </Result>
+        </div>
       </Main>
     </Container>
   )

@@ -6,6 +6,20 @@ export const Container = styled.div`
   gap: 2rem;
   justify-content: center;
 
+  > button {
+    background: none;
+    border: none;
+    svg {
+      color: ${({ theme }) => theme.COLORS.light100};
+    }
+
+    &:hover {
+      svg {
+        color: ${({ theme }) => theme.COLORS.fatal};
+      }
+    }
+  }
+
   > label {
     font-family: ${({ theme }) => theme.FONTS.Poppins};
     font-weight: 400;

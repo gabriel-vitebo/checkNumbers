@@ -7,6 +7,8 @@ export default {
     correct: '#0c9c02',
     correctHover: '#076101',
     dark: '#00111A',
+    fatal: '#940f00',
+    fatal2: '#4f0800',
   },
 
   FONTS: {

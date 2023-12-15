@@ -14,9 +14,18 @@ import { ChangeEvent, useState } from 'react'
 
 function App() {
   const [userNumber, setUserNumber] = useState('')
+  const [userNumberList, setUserNumberList] = useState<string[]>([])
+  const [amount, setAmount] = useState(0)
 
   const handleUserNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserNumber(e.target.value)
+  }
+
+  const handleAddNumber = () => {
+    setUserNumberList((prevList) => [...prevList, userNumber])
+    setUserNumber('')
+    setAmount(amount + 1)
+    console.log('entrou')
   }
 
   console.log(userNumber)
@@ -30,7 +39,9 @@ function App() {
             hasButton
             placeholder={'ex.: 01,20,65,78,07,33'}
             onChange={handleUserNumberChange}
+            value={userNumber}
             option="Adicionar"
+            onClick={handleAddNumber}
           />
         </UserNumberGame>
         <DrawnNumbers>
@@ -44,27 +55,38 @@ function App() {
         </DrawnNumbers>
       </Header>
       <Main>
-        <div className="buttonDelete">
-          <DeleteButton />
-        </div>
+        {userNumberList.length >= 1 ? (
+          <div className="buttonDelete">
+            <DeleteButton />
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className="content">
           <UserGames>
-            <InputReadOnly
-              id="gameOne"
-              title="Jogo 1"
-              value="default"
-              readOnly
-              hasButton
-            />
+            {userNumberList.map((number, index) => (
+              <InputReadOnly
+                key={index}
+                id={amount.toString()}
+                title={`jogo ${amount.toString()}`}
+                value={number}
+                readOnly
+                hasButton
+              />
+            ))}
           </UserGames>
           <Result>
-            <InputReadOnly
-              hasButton={false}
-              id="gameOne"
-              title="Resultado"
-              value={'01-20-65-78-07-33'}
-              readOnly
-            />
+            {userNumberList.map((number, index) => (
+              <InputReadOnly
+                key={index}
+                id={amount.toString()}
+                title={`jogo ${amount.toString()}`}
+                value="default"
+                hasButton={false}
+                readOnly
+              />
+            ))}
           </Result>
         </div>
       </Main>

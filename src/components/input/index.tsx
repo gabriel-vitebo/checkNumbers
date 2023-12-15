@@ -7,14 +7,22 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   hasButton: boolean
   placeholder?: string
   option?: string
+  value?: string
 }
 
-export function Input({ title, id, hasButton, placeholder, option }: Props) {
+export function Input({
+  title,
+  id,
+  hasButton,
+  placeholder,
+  option,
+  value,
+}: Props) {
   return (
     <Container>
       <label htmlFor={id}>{title}</label>
       <div className="input-area">
-        <input id={id} placeholder={placeholder} />
+        <input id={id} placeholder={placeholder} value={value} />
       </div>
       {hasButton ? <button type="button">{option}</button> : null}
     </Container>

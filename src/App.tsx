@@ -1,5 +1,14 @@
 import { Input } from './components/input'
-import { Container, DrawnNumbers, Header, Main, UserNumberGame } from './styles'
+import { InputReadOnly } from './components/inputReadOnly'
+import {
+  Container,
+  DrawnNumbers,
+  Header,
+  Main,
+  Result,
+  UserGames,
+  UserNumberGame,
+} from './styles'
 
 function App() {
   return (
@@ -25,13 +34,22 @@ function App() {
         </DrawnNumbers>
       </Header>
       <Main>
-        <Input
-          id="gameOne"
-          hasButton={false}
-          title="Jogo 1"
-          value={'01, 02, 03'}
-          readOnly
-        />
+        <UserGames>
+          <InputReadOnly
+            id="gameOne"
+            title="Jogo 1"
+            value={'01-20-65-78-07-33'}
+            readOnly
+          />
+        </UserGames>
+        <Result>
+          <InputReadOnly
+            id="gameOne"
+            title="Resultado"
+            value={'01-20-65-78-07-33'}
+            readOnly
+          />
+        </Result>
       </Main>
     </Container>
   )

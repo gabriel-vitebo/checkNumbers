@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: grid;
   width: 90%;
   grid-template-rows: 1fr 1fr;
-  justify-content: space-around;
   align-items: center;
   padding: 2rem 0 2rem 0;
 `
@@ -13,7 +12,9 @@ export const Header = styled.header`
   display: grid;
   width: 100vw;
   grid-template-columns: 1fr 1fr;
-  padding: 2rem 0 2rem 0;
+  padding: 2rem 0 2.5rem 0;
+  border-bottom: 1px solid;
+  border-color: ${({ theme }) => theme.COLORS.line};
 `
 
 export const UserNumberGame = styled.div`
@@ -46,6 +47,12 @@ export const DrawnNumbers = styled.div`
 
 export const Main = styled.main`
   display: grid;
-  width: 100vw;
   grid-template-columns: 1fr 1fr;
+  padding: 2rem 0 2rem 0;
+  justify-content: space-around;
+  align-items: center;
 `
+
+export const UserGames = styled.main``
+
+export const Result = styled.main``

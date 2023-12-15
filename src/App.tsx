@@ -10,8 +10,16 @@ import {
   UserGames,
   UserNumberGame,
 } from './styles'
+import { ChangeEvent, useState } from 'react'
 
 function App() {
+  const [userNumber, setUserNumber] = useState('')
+
+  const handleUserNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserNumber(e.target.value)
+  }
+
+  console.log(userNumber)
   return (
     <Container>
       <Header>
@@ -21,6 +29,7 @@ function App() {
             id="userNumber"
             hasButton
             placeholder={'ex.: 01,20,65,78,07,33'}
+            onChange={handleUserNumberChange}
             option="Adicionar"
           />
         </UserNumberGame>
@@ -43,7 +52,7 @@ function App() {
             <InputReadOnly
               id="gameOne"
               title="Jogo 1"
-              value={'01-20-65-78-07-33'}
+              value="default"
               readOnly
               hasButton
             />

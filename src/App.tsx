@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from 'react'
 import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
 import { InputReadOnly } from './components/inputReadOnly'
@@ -10,11 +11,11 @@ import {
   UserGames,
   UserNumberGame,
 } from './styles'
-import { ChangeEvent, useState } from 'react'
 
 function App() {
   const [userNumber, setUserNumber] = useState('')
   const [userNumberList, setUserNumberList] = useState<string[]>([])
+  const [drawnNumbers, setDrawnNumbers] = useState<string[]>([])
   const [amount, setAmount] = useState(0)
 
   const handleUserNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +25,30 @@ function App() {
   const handleAddNumber = () => {
     setUserNumberList((prevList) => [...prevList, userNumber])
     setUserNumber('')
-    setAmount(amount + 1)
+    setAmount((prevAmount) => prevAmount + 1)
   }
 
-  console.log(userNumber)
+  const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const numbers = e.target.value.split(',')
+    setDrawnNumbers(numbers.map((num) => num.trim()))
+  }
+
+  const handleCheckNumbers = () => {
+    // Perform the logic to check matching numbers and update the result field
+    const results = userNumberList.map((userNumbers) => {
+      const matchedNumbers = userNumbers
+        .split(',')
+        .map((num) => num.trim())
+        .filter((num) => drawnNumbers.includes(num))
+      return matchedNumbers.join(', ')
+    })
+
+    // Update the result field for each game
+    setUserNumberList((prevList) =>
+      prevList.map((userNumbers, index) => results[index]),
+    )
+  }
+
   return (
     <Container>
       <Header>
@@ -49,7 +70,9 @@ function App() {
             id="resultNumber"
             hasButton
             placeholder={'ex.: 01,20,65,78,07,33'}
+            onChange={handleDrawnNumbersChange}
             option="Conferir"
+            onClick={handleCheckNumbers}
           />
         </DrawnNumbers>
       </Header>
@@ -76,12 +99,12 @@ function App() {
             ))}
           </UserGames>
           <Result>
-            {userNumberList.map((index) => (
+            {userNumberList.map((result, index) => (
               <InputReadOnly
                 key={index}
                 id={amount.toString()}
-                title={`jogo ${amount.toString()}`}
-                value="default"
+                title={`Resultado Jogo ${index + 1}`}
+                value={result}
                 hasButton={false}
                 readOnly
               />

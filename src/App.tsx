@@ -25,7 +25,6 @@ function App() {
     setUserNumberList((prevList) => [...prevList, userNumber])
     setUserNumber('')
     setAmount(amount + 1)
-    console.log('entrou')
   }
 
   console.log(userNumber)
@@ -77,7 +76,7 @@ function App() {
             ))}
           </UserGames>
           <Result>
-            {userNumberList.map((number, index) => (
+            {userNumberList.map((index) => (
               <InputReadOnly
                 key={index}
                 id={amount.toString()}

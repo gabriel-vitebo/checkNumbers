@@ -5,6 +5,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 2rem;
   justify-content: center;
+  margin-bottom: 1.5rem;
 
   > button {
     background: none;

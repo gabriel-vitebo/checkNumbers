@@ -57,6 +57,8 @@ function App() {
   }
 
   const handleDeleteAllGames = () => {
+    localStorage.removeItem('@checkNumbers/userNumbers')
+    localStorage.removeItem('@checkNumbers/gameResults')
     setUserNumberList([])
     setResults([])
   }
@@ -69,6 +71,30 @@ function App() {
     const newResults = [...results]
     newResults.splice(index, 1)
     setResults(newResults)
+
+    const storedUserNumbers =
+      localStorage.getItem('@checkNumbers/userNumbers') || '[]'
+    const storedGameResults =
+      localStorage.getItem('@checkNumbers/gameResults') || '[]'
+
+    if (storedUserNumbers && storedGameResults) {
+      const parsedUserNumbers = JSON.parse(storedUserNumbers)
+      const parsedGameResults = JSON.parse(storedGameResults)
+
+      parsedUserNumbers.splice(index, 1)
+      parsedGameResults.splice(index, 1)
+
+      localStorage.setItem(
+        '@checkNumbers/userNumbers',
+        JSON.stringify(parsedUserNumbers),
+      )
+      localStorage.setItem(
+        '@checkNumbers/gameResults',
+        JSON.stringify(parsedGameResults),
+      )
+      setUserNumberList(parsedUserNumbers)
+      setResults(parsedGameResults)
+    }
   }
 
   useEffect(() => {

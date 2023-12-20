@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
 import { InputReadOnly } from './components/inputReadOnly'
@@ -25,12 +25,20 @@ function App() {
   const handleAddNumber = () => {
     setUserNumberList((prevList) => [...prevList, userNumber])
     setUserNumber('')
+
+    const storedNumbers =
+      localStorage.getItem('@checkNumbers/userNumbers') || '[]'
+    const numbersArray = JSON.parse(storedNumbers)
+    numbersArray.push(userNumber)
+    localStorage.setItem(
+      '@checkNumbers/userNumbers',
+      JSON.stringify(numbersArray),
+    )
   }
 
   const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
     const numbers = e.target.value.split(',')
     setDrawnNumbers(numbers.map((num) => num.trim()))
-    localStorage.setItem('userSavedGame', JSON.stringify(drawnNumbers))
   }
 
   const handleCheckNumbers = () => {
@@ -39,9 +47,12 @@ function App() {
         .split(',')
         .map((num) => num.trim())
         .filter((num) => drawnNumbers.includes(num))
-      console.log(matchedNumbers)
       return matchedNumbers.join(', ')
     })
+    localStorage.setItem(
+      '@checkNumbers/gameResults',
+      JSON.stringify(newResults),
+    )
     setResults(newResults)
   }
 
@@ -51,16 +62,26 @@ function App() {
   }
 
   const handleDeleteGame = (index: number) => {
-    // Implement the logic to delete the game at the specified index
     const newUserNumberList = [...userNumberList]
     newUserNumberList.splice(index, 1)
     setUserNumberList(newUserNumberList)
 
-    // Also update the results array if needed
     const newResults = [...results]
     newResults.splice(index, 1)
     setResults(newResults)
   }
+
+  useEffect(() => {
+    const storedUserNumbers = localStorage.getItem('@checkNumbers/userNumbers')
+    const storedGameResults = localStorage.getItem('@checkNumbers/gameResults')
+
+    if (storedUserNumbers !== null) {
+      setUserNumberList(JSON.parse(storedUserNumbers))
+    }
+    if (storedGameResults !== null) {
+      setResults(JSON.parse(storedGameResults))
+    }
+  }, [])
 
   return (
     <Container>

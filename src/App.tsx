@@ -30,6 +30,7 @@ function App() {
   const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
     const numbers = e.target.value.split(',')
     setDrawnNumbers(numbers.map((num) => num.trim()))
+    localStorage.setItem('userSavedGame', JSON.stringify(drawnNumbers))
   }
 
   const handleCheckNumbers = () => {
@@ -41,7 +42,23 @@ function App() {
       console.log(matchedNumbers)
       return matchedNumbers.join(', ')
     })
+    setResults(newResults)
+  }
 
+  const handleDeleteAllGames = () => {
+    setUserNumberList([])
+    setResults([])
+  }
+
+  const handleDeleteGame = (index: number) => {
+    // Implement the logic to delete the game at the specified index
+    const newUserNumberList = [...userNumberList]
+    newUserNumberList.splice(index, 1)
+    setUserNumberList(newUserNumberList)
+
+    // Also update the results array if needed
+    const newResults = [...results]
+    newResults.splice(index, 1)
     setResults(newResults)
   }
 
@@ -75,7 +92,7 @@ function App() {
       <Main>
         {userNumberList.length >= 1 ? (
           <div className="buttonDelete">
-            <DeleteButton />
+            <DeleteButton onClick={handleDeleteAllGames} />
           </div>
         ) : (
           <></>
@@ -91,6 +108,7 @@ function App() {
                 value={number}
                 readOnly
                 hasButton
+                onDelete={() => handleDeleteGame(index)}
               />
             ))}
           </UserGames>

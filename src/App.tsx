@@ -1,22 +1,22 @@
-import { ChangeEvent, useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
 import { InputReadOnly } from './components/inputReadOnly'
 import {
   Container,
-  DrawnNumbers,
   Header,
-  Main,
-  Result,
-  UserGames,
   UserNumberGame,
+  DrawnNumbers,
+  Main,
+  UserGames,
+  Result,
 } from './styles'
 
 function App() {
   const [userNumber, setUserNumber] = useState('')
   const [userNumberList, setUserNumberList] = useState<string[]>([])
   const [drawnNumbers, setDrawnNumbers] = useState<string[]>([])
-  const [amount, setAmount] = useState(0)
+  const [results, setResults] = useState<string[]>([])
 
   const handleUserNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserNumber(e.target.value)
@@ -25,7 +25,6 @@ function App() {
   const handleAddNumber = () => {
     setUserNumberList((prevList) => [...prevList, userNumber])
     setUserNumber('')
-    setAmount((prevAmount) => prevAmount + 1)
   }
 
   const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,19 +33,16 @@ function App() {
   }
 
   const handleCheckNumbers = () => {
-    // Perform the logic to check matching numbers and update the result field
-    const results = userNumberList.map((userNumbers) => {
+    const newResults = userNumberList.map((userNumbers) => {
       const matchedNumbers = userNumbers
         .split(',')
         .map((num) => num.trim())
         .filter((num) => drawnNumbers.includes(num))
+      console.log(matchedNumbers)
       return matchedNumbers.join(', ')
     })
 
-    // Update the result field for each game
-    setUserNumberList((prevList) =>
-      prevList.map((userNumbers, index) => results[index]),
-    )
+    setResults(newResults)
   }
 
   return (
@@ -89,9 +85,9 @@ function App() {
           <UserGames>
             {userNumberList.map((number, index) => (
               <InputReadOnly
-                key={index}
-                id={amount.toString()}
-                title={`jogo ${amount.toString()}`}
+                key={`userNumber-${index}`}
+                id={`userNumber-${index}`}
+                title={`jogo ${index + 1}`}
                 value={number}
                 readOnly
                 hasButton
@@ -99,12 +95,12 @@ function App() {
             ))}
           </UserGames>
           <Result>
-            {userNumberList.map((result, index) => (
+            {userNumberList.map((_, index) => (
               <InputReadOnly
-                key={index}
-                id={amount.toString()}
+                key={`result-${index}`}
+                id={`result-${index}`}
                 title={`Resultado Jogo ${index + 1}`}
-                value={result}
+                value={results[index] || ''}
                 hasButton={false}
                 readOnly
               />

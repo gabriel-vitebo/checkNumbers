@@ -121,7 +121,7 @@ function App() {
             onChange={handleUserNumberChange}
             value={userNumber}
             option="Adicionar"
-            onClick={handleAddNumber}
+            onButtonClick={handleAddNumber}
           />
         </UserNumberGame>
         <DrawnNumbers>

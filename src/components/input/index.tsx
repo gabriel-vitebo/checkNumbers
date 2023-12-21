@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, MouseEvent } from 'react'
+import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { Container } from './style'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   option?: string
   value?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
+  onButtonClick?: (event: unknown) => void
 }
 
 export function Input({
@@ -20,7 +20,7 @@ export function Input({
   option,
   value,
   onChange,
-  onClick,
+  onButtonClick,
   ...rest
 }: Props) {
   return (
@@ -36,7 +36,7 @@ export function Input({
         />
       </div>
       {hasButton ? (
-        <button type="button" onClick={onClick}>
+        <button type="button" onClick={onButtonClick}>
           {option}
         </button>
       ) : null}

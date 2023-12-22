@@ -54,6 +54,7 @@ function App() {
       JSON.stringify(newResults),
     )
     setResults(newResults)
+    console.log(results)
   }
 
   const handleDeleteAllGames = () => {
@@ -132,7 +133,7 @@ function App() {
             placeholder={'ex.: 01,20,65,78,07,33'}
             onChange={handleDrawnNumbersChange}
             option="Conferir"
-            onClick={handleCheckNumbers}
+            onButtonClick={handleCheckNumbers}
           />
         </DrawnNumbers>
       </Header>

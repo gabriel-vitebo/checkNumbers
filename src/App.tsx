@@ -45,8 +45,10 @@ function App() {
   }
 
   const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const numbers = e.target.value.split(',')
-    setDrawnNumbers(numbers.map((num) => num.trim()))
+    const numbers = e.target.value
+    const resultNumberFormatted = formattedNumbers(numbers)
+    const resultList = resultNumberFormatted.split(',')
+    setDrawnNumbers(resultList.map((num) => num.trim()))
   }
 
   const handleCheckNumbers = () => {
@@ -55,7 +57,7 @@ function App() {
         .split(',')
         .map((num) => num.trim())
         .filter((num) => drawnNumbers.includes(num))
-      return matchedNumbers.join(', ')
+      return matchedNumbers.join(',')
     })
     localStorage.setItem(
       '@checkNumbers/gameResults',

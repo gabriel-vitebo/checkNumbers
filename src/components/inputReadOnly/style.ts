@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  width: 100;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -8,7 +9,10 @@ export const Container = styled.div`
   margin-bottom: 1.5rem;
 
   > button {
+    margin-right: 2rem;
     background: none;
+    display: flex;
+    justify-content: flex-end;
     border: none;
     svg {
       color: ${({ theme }) => theme.COLORS.light100};
@@ -30,8 +34,6 @@ export const Container = styled.div`
   }
 
   > .input-area {
-    display: flex;
-    justify-content: center;
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.light200};
     color: ${({ theme }) => theme.COLORS.light100};

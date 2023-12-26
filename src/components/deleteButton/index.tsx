@@ -7,7 +7,7 @@ interface DeleteButtonProps {
 export function DeleteButton({ onClick, ...rest }: DeleteButtonProps) {
   return (
     <Container onClick={onClick} {...rest}>
-      Deletar todos os jogos
+      Deletar tudo
       <TiDelete size={25} />
     </Container>
   )

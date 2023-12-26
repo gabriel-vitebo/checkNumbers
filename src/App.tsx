@@ -18,18 +18,26 @@ function App() {
   const [drawnNumbers, setDrawnNumbers] = useState<string[]>([])
   const [results, setResults] = useState<string[]>([])
 
+  const formattedNumbers = (entry: string) => {
+    const numberFound = entry.match(/\d+/g) || []
+    return numberFound.map((num: string) => num.padStart(2, '0')).join(',')
+  }
+
   const handleUserNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserNumber(e.target.value)
   }
 
   const handleAddNumber = () => {
-    setUserNumberList((prevList) => [...prevList, userNumber])
+    const formattedNumber = formattedNumbers(userNumber)
+    console.log(formattedNumber)
+
+    setUserNumberList((prevList) => [...prevList, formattedNumber])
     setUserNumber('')
 
     const storedNumbers =
       localStorage.getItem('@checkNumbers/userNumbers') || '[]'
     const numbersArray = JSON.parse(storedNumbers)
-    numbersArray.push(userNumber)
+    numbersArray.push(formattedNumber)
     localStorage.setItem(
       '@checkNumbers/userNumbers',
       JSON.stringify(numbersArray),

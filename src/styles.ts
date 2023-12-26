@@ -1,10 +1,16 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  overflow: hidden;
   align-items: center;
 `
 
 export const Header = styled.header`
+  position: fixed;
+  background-color: ${({ theme }) => theme.COLORS.dark};
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -37,6 +43,8 @@ export const DrawnNumbers = styled.div`
 `
 
 export const Main = styled.main`
+  margin-top: 11.6rem;
+
   display: flex;
   width: 100vw;
   flex-direction: column;

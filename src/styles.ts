@@ -1,30 +1,22 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: grid;
-  width: 90%;
-  grid-template-rows: 1fr 1fr;
   align-items: center;
-  padding: 2rem 0 2rem 0;
 `
 
 export const Header = styled.header`
   display: flex;
   justify-content: center;
   gap: 3rem;
-  width: 100vw;
-  grid-template-columns: 1fr 1fr;
+  width: 100%;
   padding: 2rem 0 2.5rem 0;
   border-bottom: 1px solid;
   border-color: ${({ theme }) => theme.COLORS.line};
 `
 
 export const UserNumberGame = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   > h2 {
+    margin-left: 2rem;
     margin-bottom: 1.5rem;
     font-family: ${({ theme }) => theme.FONTS.Poppins};
     font-weight: 500;
@@ -34,11 +26,8 @@ export const UserNumberGame = styled.div`
 `
 
 export const DrawnNumbers = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   > h2 {
+    margin-left: 2rem;
     margin-bottom: 1.5rem;
     font-family: ${({ theme }) => theme.FONTS.Poppins};
     font-weight: 500;

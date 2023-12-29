@@ -124,11 +124,11 @@ function App() {
     <Container>
       <Header>
         <UserNumberGame>
-          <h2>Digite os seus números</h2>
+          <h2>Jogos</h2>
           <Input
             id="userNumber"
             hasButton
-            placeholder={'ex.: 01,20,65,78,07,33'}
+            placeholder={'Digite os seus números'}
             onChange={handleUserNumberChange}
             value={userNumber}
             option="Adicionar"
@@ -136,11 +136,11 @@ function App() {
           />
         </UserNumberGame>
         <DrawnNumbers>
-          <h2>Digite os números sorteados</h2>
+          <h2>Resultado</h2>
           <Input
             id="resultNumber"
             hasButton
-            placeholder={'ex.: 01,20,65,78,07,33'}
+            placeholder={'Digite o resultado'}
             onChange={handleDrawnNumbersChange}
             option="Conferir"
             onButtonClick={handleCheckNumbers}

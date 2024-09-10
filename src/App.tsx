@@ -57,7 +57,8 @@ function App() {
         .split(',')
         .map((num) => num.trim())
         .filter((num) => drawnNumbers.includes(num))
-      return matchedNumbers.join(',')
+      const totalMatches = matchedNumbers.length
+      return `(${totalMatches}) ${matchedNumbers.join(',')}`
     })
     localStorage.setItem(
       '@checkNumbers/gameResults',

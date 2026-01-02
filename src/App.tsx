@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, useEffect, useRef } from 'react'
 import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
+import { DetailsModal } from './components/detailsModal'
 import { InputReadOnly } from './components/inputReadOnly'
 import {
   Container,
@@ -12,6 +13,12 @@ import {
   Result,
 } from './styles'
 
+interface ModalGameResult {
+  index: number
+  matchedNumbers: string[]
+  count: number
+}
+
 function App() {
   const [userNumber, setUserNumber] = useState('')
   const [userNumberList, setUserNumberList] = useState<string[]>([])
@@ -19,6 +26,12 @@ function App() {
   const [results, setResults] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement | null>(null)
   const lastItemRef = useRef<HTMLDivElement | null>(null)
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [groupedResults, setGroupedResults] = useState<
+    Record<number, ModalGameResult[]>
+  >({})
+
 
   const formattedNumbers = (entry: string) => {
     const numberFound = entry.match(/\d+/g) || []
@@ -113,6 +126,35 @@ function App() {
     }
   }
 
+  const handleOpenDetails = () => {
+    const grouped: Record<number, ModalGameResult[]> = {}
+
+    userNumberList.forEach((userNumbers, index) => {
+      const matchedNumbers = userNumbers
+        .split(',')
+        .map((n) => n.trim())
+        .filter((n) => drawnNumbers.includes(n))
+
+      const count = matchedNumbers.length
+
+      if (count === 0) return
+
+      if (!grouped[count]) {
+        grouped[count] = []
+      }
+
+      grouped[count].push({
+        index,
+        matchedNumbers,
+        count,
+      })
+    })
+
+    setGroupedResults(grouped)
+    setIsModalOpen(true)
+    }
+
+
   useEffect(() => {
     const storedUserNumbers = localStorage.getItem('@checkNumbers/userNumbers')
     const storedGameResults = localStorage.getItem('@checkNumbers/gameResults')
@@ -159,6 +201,24 @@ function App() {
             onButtonClick={handleCheckNumbers}
           />
         </DrawnNumbers>
+        {results.length > 0 && (
+          <button
+            type="button"
+            onClick={handleOpenDetails}
+            style={{
+              marginLeft: '1rem',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.2)',
+              color: 'white',
+              padding: '0.6rem 1rem',
+              borderRadius: '6px',
+              cursor: 'pointer',
+            }}
+          >
+            Ver detalhes
+          </button>
+        )}
+
       </Header>
       <Main>
         {userNumberList.length >= 1 ? (
@@ -201,6 +261,11 @@ function App() {
           </Result>
         </div>
       </Main>
+    <DetailsModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      grouped={groupedResults}
+    />
     </Container>
   )
 }

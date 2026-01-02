@@ -1,4 +1,13 @@
-import { Overlay, Container, Header, CloseButton, Columns, Column, Item } from './style'
+import { useEffect } from 'react'
+import {
+  Overlay,
+  Container,
+  Header,
+  CloseButton,
+  Columns,
+  Column,
+  Item,
+} from './style'
 
 interface ModalGameResult {
   index: number
@@ -13,6 +22,18 @@ interface Props {
 }
 
 export function DetailsModal({ isOpen, onClose, grouped }: Props) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   const counts = Object.keys(grouped)

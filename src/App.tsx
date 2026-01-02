@@ -152,7 +152,7 @@ function App() {
 
     setGroupedResults(grouped)
     setIsModalOpen(true)
-    }
+  }
 
 
   useEffect(() => {

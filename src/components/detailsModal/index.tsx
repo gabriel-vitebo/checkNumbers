@@ -1,4 +1,13 @@
-import { Overlay, Container, Header, CloseButton, Columns, Column, Item } from './style'
+import { useEffect } from 'react'
+import {
+  Overlay,
+  Container,
+  Header,
+  CloseButton,
+  Columns,
+  Column,
+  Item,
+} from './style'
 
 interface ModalGameResult {
   index: number
@@ -13,6 +22,22 @@ interface Props {
 }
 
 export function DetailsModal({ isOpen, onClose, grouped }: Props) {
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscapeKey)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey)
+    }
+  }, [isOpen, onClose])
+
   if (!isOpen) return null
 
   const counts = Object.keys(grouped)

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react'
+import { useState, ChangeEvent, useEffect, useRef } from 'react'
 import { DeleteButton } from './components/deleteButton'
 import { Input } from './components/input'
 import { InputReadOnly } from './components/inputReadOnly'
@@ -17,6 +17,8 @@ function App() {
   const [userNumberList, setUserNumberList] = useState<string[]>([])
   const [drawnNumbers, setDrawnNumbers] = useState<string[]>([])
   const [results, setResults] = useState<string[]>([])
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const lastItemRef = useRef<HTMLDivElement | null>(null)
 
   const formattedNumbers = (entry: string) => {
     const numberFound = entry.match(/\d+/g) || []
@@ -29,7 +31,8 @@ function App() {
 
   const handleAddNumber = () => {
     const formattedNumber = formattedNumbers(userNumber)
-    console.log(formattedNumber)
+
+    if (!formattedNumber) return
 
     setUserNumberList((prevList) => [...prevList, formattedNumber])
     setUserNumber('')
@@ -42,6 +45,7 @@ function App() {
       '@checkNumbers/userNumbers',
       JSON.stringify(numbersArray),
     )
+    inputRef.current?.focus()
   }
 
   const handleDrawnNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -121,6 +125,13 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (userNumberList.length === 0) return
+    setTimeout(() => {
+      lastItemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }, 50)
+  }, [userNumberList])
+
   return (
     <Container>
       <Header>
@@ -134,6 +145,7 @@ function App() {
             value={userNumber}
             option="Adicionar"
             onButtonClick={handleAddNumber}
+            inputRef={inputRef}
           />
         </UserNumberGame>
         <DrawnNumbers>
@@ -160,15 +172,19 @@ function App() {
         <div className="content">
           <UserGames>
             {userNumberList.map((number, index) => (
-              <InputReadOnly
+              <div
                 key={`userNumber-${index}`}
-                id={`userNumber-${index}`}
-                title={`jogo ${index + 1}`}
-                value={number}
-                readOnly
-                hasButton
-                onDelete={() => handleDeleteGame(index)}
-              />
+                ref={index === userNumberList.length - 1 ? lastItemRef : null}
+              >
+                <InputReadOnly
+                  id={`userNumber-${index}`}
+                  title={`jogo ${index + 1}`}
+                  value={number}
+                  readOnly
+                  hasButton
+                  onDelete={() => handleDeleteGame(index)}
+                />
+              </div>
             ))}
           </UserGames>
           <Result>

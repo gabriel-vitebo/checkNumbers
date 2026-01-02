@@ -23,15 +23,15 @@ interface Props {
 
 export function DetailsModal({ isOpen, onClose, grouped }: Props) {
   useEffect(() => {
+    if (!isOpen) return
+
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose()
       }
     }
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscapeKey)
-    }
+    document.addEventListener('keydown', handleEscapeKey)
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey)

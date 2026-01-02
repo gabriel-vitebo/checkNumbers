@@ -32,7 +32,6 @@ function App() {
     Record<number, ModalGameResult[]>
   >({})
 
-
   const formattedNumbers = (entry: string) => {
     const numberFound = entry.match(/\d+/g) || []
     return numberFound.map((num: string) => num.padStart(2, '0')).join(',')
@@ -154,7 +153,6 @@ function App() {
     setIsModalOpen(true)
   }
 
-
   useEffect(() => {
     const storedUserNumbers = localStorage.getItem('@checkNumbers/userNumbers')
     const storedGameResults = localStorage.getItem('@checkNumbers/gameResults')
@@ -170,7 +168,10 @@ function App() {
   useEffect(() => {
     if (userNumberList.length === 0) return
     setTimeout(() => {
-      lastItemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      lastItemRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
     }, 50)
   }, [userNumberList])
 
@@ -218,7 +219,6 @@ function App() {
             Ver detalhes
           </button>
         )}
-
       </Header>
       <Main>
         {userNumberList.length >= 1 ? (
@@ -261,11 +261,11 @@ function App() {
           </Result>
         </div>
       </Main>
-    <DetailsModal
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      grouped={groupedResults}
-    />
+      <DetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        grouped={groupedResults}
+      />
     </Container>
   )
 }

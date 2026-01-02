@@ -1,3 +1,5 @@
+## [1.1.0](https://github.com/gabriel-vitebo/checkNumbers/compare/v1.0.0...v1.1.0) (2026-01-02)
+
 ## 1.0.0 (2026-01-02)
 
 ### Features

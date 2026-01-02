@@ -32,7 +32,6 @@ function App() {
     Record<number, ModalGameResult[]>
   >({})
 
-
   const formattedNumbers = (entry: string) => {
     const numberFound = entry.match(/\d+/g) || []
     return numberFound.map((num: string) => num.padStart(2, '0')).join(',')

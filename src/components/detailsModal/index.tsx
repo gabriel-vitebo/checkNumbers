@@ -1,4 +1,12 @@
-import { Overlay, Container, Header, CloseButton, Columns, Column, Item } from './style'
+import {
+  Overlay,
+  Container,
+  Header,
+  CloseButton,
+  Columns,
+  Column,
+  Item,
+} from './style'
 
 interface ModalGameResult {
   index: number

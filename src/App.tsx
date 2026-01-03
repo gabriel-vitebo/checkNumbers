@@ -11,6 +11,7 @@ import {
   Main,
   UserGames,
   Result,
+  DetailsButton,
 } from './styles'
 
 interface ModalGameResult {
@@ -203,21 +204,9 @@ function App() {
           />
         </DrawnNumbers>
         {results.length > 0 && (
-          <button
-            type="button"
-            onClick={handleOpenDetails}
-            style={{
-              marginLeft: '1rem',
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'white',
-              padding: '0.6rem 1rem',
-              borderRadius: '6px',
-              cursor: 'pointer',
-            }}
-          >
+          <DetailsButton type="button" onClick={handleOpenDetails}>
             Ver detalhes
-          </button>
+          </DetailsButton>
         )}
       </Header>
       <Main>

@@ -94,13 +94,7 @@ export function DetailsModal({ isOpen, onClose, grouped }: Props) {
 
   return (
     <Overlay onClick={onClose}>
-      <Container
-        ref={containerRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <Container onClick={(e) => e.stopPropagation()}>
         <Header>
           <h3 id="modal-title">Detalhes dos Resultados</h3>
           <CloseButton

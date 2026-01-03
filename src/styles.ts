@@ -71,3 +71,17 @@ export const Main = styled.main`
 export const UserGames = styled.main``
 
 export const Result = styled.main``
+
+export const DetailsButton = styled.button`
+  margin-left: 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+`

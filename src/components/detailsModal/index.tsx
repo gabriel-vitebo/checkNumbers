@@ -1,4 +1,12 @@
-import { Overlay, Container, Header, CloseButton, Columns, Column, Item } from './style'
+import {
+  Overlay,
+  Container,
+  Header,
+  CloseButton,
+  Columns,
+  Column,
+  Item,
+} from './style'
 
 interface ModalGameResult {
   index: number
@@ -20,8 +28,8 @@ export function DetailsModal({ isOpen, onClose, grouped }: Props) {
     .sort((a, b) => b - a)
 
   return (
-    <Overlay>
-      <Container>
+    <Overlay onClick={onClose}>
+      <Container onClick={(e) => e.stopPropagation()}>
         <Header>
           <h3>Detalhes dos Resultados</h3>
           <CloseButton onClick={onClose}>×</CloseButton>

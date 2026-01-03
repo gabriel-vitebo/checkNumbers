@@ -11,6 +11,7 @@ import {
   Main,
   UserGames,
   Result,
+  DetailsButton,
 } from './styles'
 
 interface ModalGameResult {
@@ -153,7 +154,6 @@ function App() {
     setIsModalOpen(true)
   }
 
-
   useEffect(() => {
     const storedUserNumbers = localStorage.getItem('@checkNumbers/userNumbers')
     const storedGameResults = localStorage.getItem('@checkNumbers/gameResults')
@@ -169,7 +169,10 @@ function App() {
   useEffect(() => {
     if (userNumberList.length === 0) return
     setTimeout(() => {
-      lastItemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      lastItemRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
     }, 50)
   }, [userNumberList])
 
@@ -201,23 +204,10 @@ function App() {
           />
         </DrawnNumbers>
         {results.length > 0 && (
-          <button
-            type="button"
-            onClick={handleOpenDetails}
-            style={{
-              marginLeft: '1rem',
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'white',
-              padding: '0.6rem 1rem',
-              borderRadius: '6px',
-              cursor: 'pointer',
-            }}
-          >
+          <DetailsButton type="button" onClick={handleOpenDetails}>
             Ver detalhes
-          </button>
+          </DetailsButton>
         )}
-
       </Header>
       <Main>
         {userNumberList.length >= 1 ? (
@@ -260,11 +250,11 @@ function App() {
           </Result>
         </div>
       </Main>
-    <DetailsModal
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      grouped={groupedResults}
-    />
+      <DetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        grouped={groupedResults}
+      />
     </Container>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   Overlay,
   Container,
@@ -45,11 +45,23 @@ export function DetailsModal({ isOpen, onClose, grouped }: Props) {
     .sort((a, b) => b - a)
 
   return (
-    <Overlay>
-      <Container>
+    <Overlay onClick={onClose}>
+      <Container
+        ref={containerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Header>
-          <h3>Detalhes dos Resultados</h3>
-          <CloseButton onClick={onClose}>×</CloseButton>
+          <h3 id="modal-title">Detalhes dos Resultados</h3>
+          <CloseButton
+            ref={closeButtonRef}
+            onClick={onClose}
+            aria-label="Fechar modal"
+          >
+            ×
+          </CloseButton>
         </Header>
 
         <Columns>
